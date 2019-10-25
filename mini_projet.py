@@ -15,6 +15,7 @@ def distance1h(distance): # retourne le temps pour moins de 2 heures
     temps = (distance * 60) / 90
     return temps
 
+
 dico = {("Marseille","Nîmes"): 122, ("Marseille", "Ajaccio"): 521, ("Marseille", "Paris"): 773, ("Marseille","Perpignan"): 317,
         ("Marseille", "Annecy"): 421, ("Marseille", "Besançon"): 564, ("Marseille", "Toulouse"): 403, ("Marseille", "Toulon"): 67,
         ("Nîmes", "Ajaccio"): 605, ("Nîmes", "Paris"): 711, ("Nîmes", "Perpignan"): 203, ("Nîmes", "Annecy"): 359,
@@ -74,20 +75,36 @@ if (distanceAfaire / distanceParcouru2Heures) > 0 and (distanceAfaire / distance
 else:
     coef = distanceAfaire / distanceParcouru2Heures
     distanceRestant = distanceAfaire % distanceParcouru2Heures
-    temps = distance1h(distanceRestant) + (floor(coef) * 120) + (floor(coef) * 15)
-    while temps > 60:
-        heures += 1
-        temps -= 60
-    if heures < 10:
-        if temps < 10:
-            print("Temps: 0" + str(heures) +  "/0" + str(ceil(temps)))
+    if distanceRestant < 15:
+        temps = distance1h(distanceRestant) + (floor(coef) * 120) + (floor(coef - 1) * 15)
+        while temps > 60:
+            heures += 1
+            temps -= 60
+        if heures < 10:
+            if temps < 10:
+                print("Temps: 0" + str(heures) +  "/0" + str(ceil(temps)))
+            else:
+                print("Temps: 0" + str(heures) +  "/" + str(ceil(temps)))
         else:
-            print("Temps: 0" + str(heures) +  "/" + str(ceil(temps)))
+            if temps < 10:
+                print("Temps: " + str(heures) +  "/0" + str(ceil(temps)))
+            else:
+                print("Temps: " + str(heures) +  "/" + str(ceil(temps)))
     else:
-        if temps < 10:
-            print("Temps: " + str(heures) +  "/0" + str(ceil(temps)))
+        temps = distance1h(distanceRestant) + (floor(coef) * 120) + (floor(coef) * 15)
+        while temps > 60:
+            heures += 1
+            temps -= 60
+        if heures < 10:
+            if temps < 10:
+                print("Temps: 0" + str(heures) +  "/0" + str(ceil(temps)))
+            else:
+                print("Temps: 0" + str(heures) +  "/" + str(ceil(temps)))
         else:
-            print("Temps: " + str(heures) +  "/" + str(ceil(temps)))
+            if temps < 10:
+                print("Temps: " + str(heures) +  "/0" + str(ceil(temps)))
+            else:
+                print("Temps: " + str(heures) +  "/" + str(ceil(temps)))
 
     
 
